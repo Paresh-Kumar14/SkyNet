@@ -4,7 +4,14 @@ const { default: axios } = require('axios');
 
 const app = express();
 app.use(express.json());
-app.use(cors({origin:true}));
+app.use(
+    cors({
+      origin: ["http://localhost:3000", "https://skynet-chat.vercel.app"],
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
+      headers: ["Authorization", "Content-Type"],
+    })
+  );
 
 app.post("/authenticate",async(req,res)=>{
     const { username }= req.body;
